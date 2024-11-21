@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro - Easy Task</title>
+    <link rel="stylesheet" href="{% static 'to_do_list/css/styles.css' %}" />
+  </head>
+
+  <body class="base-page">
+    <header class="navbar">
+      <div class="header-left-side">
+        <h1>Gerenciamento de Tarefas</h1>
+      </div>
+      <div class="header-right-side">
+        <a class="account-link" href="{% url 'register_user' %}">Cadastro de Usuário</a>
+        <a class="account-link" href="{% url 'create_task' %}">Cadastro de Tarefa</a>
+        <a class="account-link" href="{% url 'manage_tasks' %}">Gerenciamento de Tarefa</a>
+      </div>
+    </header>
+
+    <div class="body-main">
+      <main class="content">
+        <div class="form-box">
+          <h2>Faça o cadastro do usuário</h2>
+          <form method="post" action="{% url 'register_user' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="id_username">Nome de Usuário</label>
+              <input type="text" name="username" id="id_username" placeholder="Digite seu nome de usuário" required />
+            </div>
+
+            <div class="form-group">
+              <label for="id_email">E-mail</label>
+              <input type="email" name="email" id="id_email" placeholder="Digite seu e-mail" required />
+            </div>
+
+            <div class="submit-div">
+              <button type="submit" class="submit-btn">Cadastrar Usuário</button>
+            </div>
+          </form>
+        </div>
+
+        {% if messages %}
+          {% for message in messages %}
+            <script src="{% static 'to_do_list/js/alert.js' %}" defer data-message="{{ message }}"></script>
+          {% endfor %}
+        {% endif %}
+      </main>
+    </div>
+  </body>
+</html>

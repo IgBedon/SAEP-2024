@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <title>Tarefa - Easy Task</title>
+    <link rel="stylesheet" href="{% static 'to_do_list/css/styles.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  </head>
+  <body class="base-page">
+    <header class="navbar">
+      <div class="header-left-side">
+        <h1>Gerenciamento de Tarefas</h1>
+      </div>
+      <div class="header-right-side">
+        <a class="account-link" href="{% url 'register_user' %}">Cadastro de Usuário</a>
+        <a class="account-link" href="{% url 'create_task' %}">Cadastro de Tarefa</a>
+        <a class="account-link" href="{% url 'manage_tasks' %}">Gerenciamento de Tarefa</a>
+      </div>
+    </header>
+
+    <div class="body-main">
+      <div class="content">
+        <main class="content-main">
+          <div class="tasks-container">
+            <div class="task-column">
+              <h2>A Fazer</h2>
+              <div class="task-list" id="to-do">
+                {% for task in tasks %}
+                  {% if task.status == "A Fazer" %}
+                    <div class="task-card">
+                      <h3>{{ task.description }}</h3>
+                      <p>Prioridade: {{ task.priority }}</p>
+                      <p>Departamento: {{ task.department_name }}</p>
+                      <p>Vinculado a: {{ task.user }}</p>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+            <div class="task-column">
+              <h2>Fazendo</h2>
+              <div class="task-list" id="in-progress">
+                {% for task in tasks %}
+                  {% if task.status == "Fazendo" %}
+                    <div class="task-card">
+                      <h3>{{ task.description }}</h3>
+                      <p>Prioridade: {{ task.priority }}</p>
+                      <p>Departamento: {{ task.department_name }}</p>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+            <div class="task-column">
+              <h2>Pronto</h2>
+              <div class="task-list" id="done">
+                {% for task in tasks %}
+                  {% if task.status == "Pronto" %}
+                    <div class="task-card">
+                      <h3>{{ task.description }}</h3>
+                      <p>Prioridade: {{ task.priority }}</p>
+                      <p>Departamento: {{ task.department_name }}</p>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
