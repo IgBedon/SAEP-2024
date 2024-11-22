@@ -5,14 +5,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=0.75" />
-    <title>Tarefa - Easy Task</title>
+    <title>Tarefa</title>
     <link rel="stylesheet" href="{% static 'to_do_list/css/styles.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   </head>
   <body class="base-page">
     <header class="navbar">
       <div class="header-left-side">
-        <h1>Gerenciamento de Tarefas</h1>
+        <a href="{% url 'menu' %}"><h2>Gerenciamento de Tarefas</h2></a>
       </div>
       <div class="header-right-side">
         <a class="account-link" href="{% url 'register_user' %}">Cadastro de Usuário</a>
@@ -29,12 +29,39 @@
               <h2>A Fazer</h2>
               <div class="task-list" id="to-do">
                 {% for task in tasks %}
-                  {% if task.status == "A Fazer" %}
+                  {% if task.status == 'A Fazer' %}
                     <div class="task-card">
                       <h3>{{ task.description }}</h3>
                       <p>Prioridade: {{ task.priority }}</p>
                       <p>Departamento: {{ task.department_name }}</p>
                       <p>Vinculado a: {{ task.user }}</p>
+                      <div class="submit-div">
+                        <a href="{% url 'update_task' task.id %}" class="submit-a">Editar</a>
+                        <a href="{% url 'delete_task' task.id %}" class="submit-a">Deletar</a>
+                      </div>
+                      <form method="post" action="{% url 'update_task_status' task.id %}">
+                        {% csrf_token %}
+                        <div class="form-group form-status">
+                          <div class="status-div">
+                            <label for="status">Prioridade</label>
+                            <select id="status" name="status" required>
+                              <option value={{task.status}} selected>{{task.status}}</option>
+                              {% if task.status != 'A Fazer' %}
+                                <option value="A Fazer">A Fazer</option>
+                              {% endif %}
+                              {% if task.status != 'Fazendo' %}
+                                <option value="Fazendo">Fazendo</option>
+                              {% endif %}
+                              {% if task.status != 'Pronto' %}
+                                <option value="Pronto">Pronto</option>
+                              {% endif %}
+                            </select>
+                          </div>
+                          <div class="submit-div">
+                            <button type="submit" class="submit-btn status-btn">Confirmar Edição</button>
+                          </div>
+                        </div>
+                      </form>
                     </div>
                   {% endif %}
                 {% endfor %}
@@ -44,12 +71,40 @@
               <h2>Fazendo</h2>
               <div class="task-list" id="in-progress">
                 {% for task in tasks %}
-                  {% if task.status == "Fazendo" %}
-                    <div class="task-card">
-                      <h3>{{ task.description }}</h3>
-                      <p>Prioridade: {{ task.priority }}</p>
-                      <p>Departamento: {{ task.department_name }}</p>
+                  {% if task.status == 'Fazendo' %}
+                  <div class="task-card">
+                    <h3>{{ task.description }}</h3>
+                    <p>Prioridade: {{ task.priority }}</p>
+                    <p>Departamento: {{ task.department_name }}</p>
+                    <p>Vinculado a: {{ task.user }}</p>
+                    <div class="submit-div">
+                      <a href="{% url 'update_task' task.id %}" class="submit-a">Editar</a>
+                      <a href="{% url 'delete_task' task.id %}" class="submit-a">Deletar</a>
                     </div>
+                    <form method="post" action="{% url 'update_task_status' task.id %}">
+                      {% csrf_token %}
+                      <div class="form-group form-status">
+                        <div class="status-div">
+                          <label for="status">Prioridade</label>
+                          <select id="status" name="status" required>
+                            <option value={{task.status}} selected>{{task.status}}</option>
+                            {% if task.status != 'A Fazer' %}
+                              <option value="A Fazer">A Fazer</option>
+                            {% endif %}
+                            {% if task.status != 'Fazendo' %}
+                              <option value="Fazendo">Fazendo</option>
+                            {% endif %}
+                            {% if task.status != 'Pronto' %}
+                              <option value="Pronto">Pronto</option>
+                            {% endif %}
+                          </select>
+                        </div>
+                        <div class="submit-div">
+                          <button type="submit" class="submit-btn status-btn">Confirmar Edição</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                   {% endif %}
                 {% endfor %}
               </div>
@@ -58,17 +113,50 @@
               <h2>Pronto</h2>
               <div class="task-list" id="done">
                 {% for task in tasks %}
-                  {% if task.status == "Pronto" %}
-                    <div class="task-card">
-                      <h3>{{ task.description }}</h3>
-                      <p>Prioridade: {{ task.priority }}</p>
-                      <p>Departamento: {{ task.department_name }}</p>
+                  {% if task.status == 'Pronto' %}
+                  <div class="task-card">
+                    <h3>{{ task.description }}</h3>
+                    <p>Prioridade: {{ task.priority }}</p>
+                    <p>Departamento: {{ task.department_name }}</p>
+                    <p>Vinculado a: {{ task.user }}</p>
+                    <div class="submit-div">
+                      <a href="{% url 'update_task' task.id %}" class="submit-a">Editar</a>
+                      <a href="{% url 'delete_task' task.id %}" class="submit-a">Deletar</a>
                     </div>
+                    <form method="post" action="{% url 'update_task_status' task.id %}">
+                      {% csrf_token %}
+                      <div class="form-group form-status">
+                        <div class="status-div">
+                          <label for="status">Prioridade</label>
+                          <select id="status" name="status" required>
+                            <option value={{task.status}} selected>{{task.status}}</option>
+                            {% if task.status != 'A Fazer' %}
+                              <option value="A Fazer">A Fazer</option>
+                            {% endif %}
+                            {% if task.status != 'Fazendo' %}
+                              <option value="Fazendo">Fazendo</option>
+                            {% endif %}
+                            {% if task.status != 'Pronto' %}
+                              <option value="Pronto">Pronto</option>
+                            {% endif %}
+                          </select>
+                        </div>
+                        <div class="submit-div">
+                          <button type="submit" class="submit-btn status-btn">Confirmar Edição</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                   {% endif %}
                 {% endfor %}
               </div>
             </div>
           </div>
+          {% if messages %}
+            {% for message in messages %}
+              <script src="{% static 'to_do_list/js/alert.js' %}" defer data-message="{{ message }}"></script>
+            {% endfor %}
+          {% endif %}
         </main>
       </div>
     </div>

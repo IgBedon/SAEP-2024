@@ -12,7 +12,7 @@
   <body class="base-page">
     <header class="navbar">
       <div class="header-left-side">
-        <h1>Gerenciamento de Tarefas</h1>
+        <a href="{% url 'menu' %}"><h2>Gerenciamento de Tarefas</h2></a>
       </div>
       <div class="header-right-side">
         <a class="account-link" href="{% url 'register_user' %}">Cadastro de Usuário</a>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="form-group">
-              <label for="task_status">Status</label>
+              <label for="username">Usuário</label>
               <select id="username" name="username" required>
                 <option value="" disabled selected>Selecione um usuário</option>
                 {% for user in users %}

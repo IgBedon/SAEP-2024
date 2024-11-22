@@ -57,12 +57,30 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.form-div {
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-around;
+}
 
 .form-group {
     display: flex;
     flex-direction: column;
     margin: 15px 0px;
     width: 100%;
+}
+
+.form-status {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0px;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.status-div {
+    margin-left: 15%;
 }
 
 .form-group label {
@@ -88,16 +106,34 @@ body {
 .submit-div {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    margin-top: 15px;
 }
 
 .submit-btn {
     border: none;
-    padding: 15px;
+    padding: 10px;
     background-color: #0056b3;
     color: white;
     cursor: pointer;
+    font-size: 16px;
+}
+
+.status-btn {
+    padding: 15px;
+    margin-left: 20%;
+}
+
+.submit-a {
+    border: none;
+    padding: 15px;
+    width: 33%;
+    background-color: #0056b3;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .content-main {

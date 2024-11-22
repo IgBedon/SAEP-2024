@@ -5,14 +5,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro - Easy Task</title>
+    <title>Cadastro</title>
     <link rel="stylesheet" href="{% static 'to_do_list/css/styles.css' %}" />
   </head>
 
   <body class="base-page">
     <header class="navbar">
       <div class="header-left-side">
-        <h1>Gerenciamento de Tarefas</h1>
+        <a href="{% url 'menu' %}"><h2>Gerenciamento de Tarefas</h2></a>
       </div>
       <div class="header-right-side">
         <a class="account-link" href="{% url 'register_user' %}">Cadastro de Usuário</a>
